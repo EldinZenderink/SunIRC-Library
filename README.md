@@ -8,36 +8,17 @@ Be aware that this application is still in development and might still have some
 
 **This is part of a few applications of mine, and the mindset while creating this library was solely set to making it work with MY applications, this means features which probably should be added, arent there, but you can request them, not sure if and when I will implement them though.**
 
-# (Basic) Usage
-The following is the fastest way to get things working, a full guide/wiki will follow in the future:
-
-There are a few extra libraries which you need (Which for now can be found within the "All Necesary Libraries" directory on this github, or you may install them using the following nuget packages (Though the libraries within the "All Necesary Libraries" directory are sure to work (incase newer versions of these libraries break things))):
-1. Get the following libraries:
-* [JSON.net - Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
-* [websocket-sharp](https://www.nuget.org/packages/WebSocketSharp)
-* [SimpleIRCLib](https://www.nuget.org/packages/SimpleIRCLib/)
-
-2. Create a C# Console project within Visual Studio
-3. Add the following code to your main:
-```` 
-    //false for local desktop usage, true for server usage (on different pc within same network)
-    SunIRCInit init = new SunIRCInit(false); 
-    Console.WriteLine("Press a key to exit!");
-    Console.ReadLine();
-    init.Shutdown();
-````
-4. Done, you should now be able to access the websocket server at: "your ip address":1515 (example: 127.0.0.1:1515) or the http server at: http://"your ip address":6010 (example: http://127.0.0.1:6010) 
-5. Read the Wiki on this github to learn about the JSON api, otherwise, using this is quit pointless.
-
-**To use the http server:**
-1. Create a directory within the executable directory called: GUI
-2. For example, http://127.0.0.1:6010/index.html would point to: "Executable Directory"/GUI/index.html
-
 **Be aware: the default download directory for the IRC client is the "Executable Directory".**
 
 **This will be changable through code whithin the near future, or upon heavy demand.**
 
 **Some settings are changable through the JSON API (such as the download directory).**
+
+# (Basic) Usage
+
+### [The All Important Wiki](https://github.com/EldinZenderink/SunIRC-Library/wiki)
+
+
 
 ### Tech
 SunIRCLibrary uses a number of open source projects to work properly:
