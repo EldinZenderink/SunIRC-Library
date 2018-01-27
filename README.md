@@ -14,7 +14,7 @@ Be aware that this application is still in development and might still have some
 
 **Some settings are changable through the JSON API (such as the download directory).**
 
-# (Basic) Usage
+# Usage
 
 ### [The All Important Wiki](https://github.com/EldinZenderink/SunIRC-Library/wiki)
 
