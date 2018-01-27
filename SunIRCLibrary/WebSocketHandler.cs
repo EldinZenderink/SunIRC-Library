@@ -201,6 +201,8 @@ namespace SunIRCLibrary
                     Debug.WriteLine("DEBUG-WEBSOCKETHANDLER: ERROR:  We've got a problem :( -> " + ex.ToString());
                 }
             }
+
+            getDownloads();
         }
 
         private void openDownloadDirectory()
@@ -219,27 +221,10 @@ namespace SunIRCLibrary
 
                 SharedData.httpserver.downloadDir = SharedData.currentDownloadLocation;
 
-                JsonIrcUpdate update = new JsonIrcUpdate();
-                update.connected = SharedData.irc.isClientRunning();
-                update.downloadlocation = SharedData.currentDownloadLocation;
-                try
-                {
-                    update.server = SharedData.irc.newIP + ":" + SharedData.irc.newPort;
-                    update.user = SharedData.irc.newUsername;
-                    update.channel = SharedData.irc.newChannel;
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine("WSDEBUG-WEBSOCKETHANDLER: no irc connection yet.");
-                    update.server = "";
-                    update.user = "";
-                    update.channel = "";
-                }
 
 
-                update.local = isLocal;
 
-                SharedData.AddToMessageList(JsonConvert.SerializeObject(update, Formatting.Indented));
+                getIrcData();
             }
             catch (Exception ex)
             {
@@ -370,6 +355,7 @@ namespace SunIRCLibrary
         {
             Debug.WriteLine("DEBUG-WEBSOCKETHANDLER: GOT MESSAGE TO CLOSE IRC CLIENT!");
             SharedData.ircHandler.closeIrcClient();
+            getIrcData();
         }
 
         protected override void OnMessage(MessageEventArgs e)
@@ -398,16 +384,16 @@ namespace SunIRCLibrary
                     openDownloadDirectory();
                     break;
                 case "set_download_directory":
-                    string path = json.extra;
+                    string path = json.extra.path;
                     setDownloadDirectoryV2(path);
                     break;
                 case "open_file":
                     openFile(json.extra);
                     break;
                 case "get_directories":
-                    if(json.extra != null)
+                    if(json.extra.path != null)
                     {
-                        if(json.extra.ToString() == "DRIVES" || json.extra.ToString() == "/")
+                        if(json.extra.path.ToString() == "DRIVES" || json.extra.path.ToString() == "/")
                         {
                             Debug.WriteLine("DEBUG-WEBSOCKETHANDLER: GETTING DRIVES");
                             getDrives();
@@ -415,7 +401,7 @@ namespace SunIRCLibrary
                         else
                         {
                             Debug.WriteLine("DEBUG-WEBSOCKETHANDLER: GETTING DIRECTORIES");
-                            string pathtoset = json.extra.ToString();
+                            string pathtoset = json.extra.path.ToString();
                             getDirectories(pathtoset);
                         }
                     } else
@@ -425,7 +411,7 @@ namespace SunIRCLibrary
                     }
                     break;
                 case "create_directory":
-                    string pathtocreate= json.extra;
+                    string pathtocreate= json.extra.path;
                     createDirectory(pathtocreate);
                     break;
                 case "connect_irc":

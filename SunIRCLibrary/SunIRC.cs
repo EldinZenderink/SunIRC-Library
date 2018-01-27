@@ -34,7 +34,7 @@ namespace SunIRCLibrary
             //initialize irc
             InitializeSimpleIRC();
 
-            Debug.WriteLine("DEBUG-MAIN: INITIALIZED LITTLEWEEB :D v0.3.0");
+            Debug.WriteLine("DEBUG-MAIN: INITIALIZED SunIRCLibrary :D v0.1.0");
             Debug.WriteLine("DEBUG-MAIN: CURRENT DIRECTORY IS: " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location).ToString());
             Debug.WriteLine("DEBUG-MAIN: WAITING FOR CONNECTION WITH INTERFACE!");
         }
